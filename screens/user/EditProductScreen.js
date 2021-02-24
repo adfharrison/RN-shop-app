@@ -7,9 +7,11 @@ import {
   FlatList,
   ScrollView,
   Platform,
+  Alert,
 } from 'react-native';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import * as productsActions from '../../store/actions/products';
 
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/UI/HeaderButton';
@@ -20,6 +22,7 @@ const EditProductsScreen = (props) => {
   const editedProduct = useSelector((state) =>
     state.products.userProducts.find((prod) => prod.id === prodId)
   );
+  const dispatch = useDispatch();
   const [title, setTitle] = useState(editedProduct ? editedProduct.title : '');
   const [imageURL, setImageURL] = useState(
     editedProduct ? editedProduct.imageUrl : ''
@@ -30,8 +33,17 @@ const EditProductsScreen = (props) => {
   );
 
   const submitHandler = useCallback(() => {
-    console.log('SUBMITTING');
-  }, []);
+    if (editedProduct) {
+      dispatch(
+        productsActions.updateProduct(prodId, title, description, imageURL)
+      );
+    } else {
+      dispatch(
+        productsActions.createProduct(title, description, imageURL, +price)
+      );
+    }
+    props.navigation.goBack();
+  }, [dispatch, prodId, title, description, imageURL, price]);
 
   useEffect(() => {
     props.navigation.setParams({ submit: submitHandler });

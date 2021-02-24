@@ -15,6 +15,7 @@ import * as cartActions from '../../store/actions/cart';
 import * as ordersActions from '../../store/actions/orders';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/UI/HeaderButton';
+import Card from '../../components/UI/Card';
 
 const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
@@ -37,7 +38,7 @@ const CartScreen = (props) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.screen}>
-      <View style={styles.summary}>
+      <Card style={styles.summary}>
         <Text style={styles.summaryText}>
           Total:
           <Text style={styles.summaryAmount}>
@@ -53,7 +54,7 @@ const CartScreen = (props) => {
             dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
           }}
         />
-      </View>
+      </Card>
 
       <FlatList
         data={cartItems}
@@ -84,13 +85,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
     padding: 10,
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: { height: 2, width: 0 },
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: 'white',
   },
   summaryText: {
     fontFamily: 'open-sans-bold',
