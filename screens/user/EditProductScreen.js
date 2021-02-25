@@ -84,7 +84,7 @@ const EditProductsScreen = (props) => {
           prodId,
           formState.inputValues.title,
           formState.inputValues.description,
-          formState.inputValues.imageURL
+          formState.inputValues.imageUrl
         )
       );
     } else {
@@ -92,7 +92,7 @@ const EditProductsScreen = (props) => {
         productsActions.createProduct(
           formState.inputValues.title,
           formState.inputValues.description,
-          formState.inputValues.imageURL,
+          formState.inputValues.imageUrl,
           +formState.inputValues.price
         )
       );
