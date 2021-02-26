@@ -6,6 +6,7 @@ import {
   FlatList,
   Button,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { TabRouter } from 'react-navigation';
@@ -35,7 +36,15 @@ const CartScreen = (props) => {
     });
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
+
+  const sendOrderHandler = async () => {
+    setIsLoading(true);
+    await dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+    setIsLoading(false);
+  };
   return (
     <View style={styles.screen}>
       <Card style={styles.summary}>
@@ -46,14 +55,16 @@ const CartScreen = (props) => {
             £ {Math.round(cartTotalAmount.toFixed(2) * 100) / 100}
           </Text>
         </Text>
-        <Button
-          color={Colors.accent}
-          title='Order Now'
-          disabled={cartItems.length === 0}
-          onPress={() => {
-            dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
-          }}
-        />
+        {isLoading ? (
+          <ActivityIndicator size='small' color={Colors.primary} />
+        ) : (
+          <Button
+            color={Colors.accent}
+            title='Order Now'
+            disabled={cartItems.length === 0}
+            onPress={sendOrderHandler}
+          />
+        )}
       </Card>
 
       <FlatList
