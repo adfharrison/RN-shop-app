@@ -6,7 +6,10 @@ import { set } from 'react-native-reanimated';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 
+// instantiate timer
 let timer;
+
+// redux-thunk allows this syntax of returning a dispatching of an async function
 
 export const authenticate = (token, userId, expiryTime) => {
   return (dispatch) => {

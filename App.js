@@ -15,6 +15,7 @@ import cartReducer from './store/reducers/cart';
 import ordersReducer from './store/reducers/orders';
 import authReducer from './store/reducers/auth';
 
+// combine all reducers
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
@@ -22,12 +23,15 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
+// instantiate store wit hall reducers
 const store = createStore(
   rootReducer,
 
+  // devtools
   composeWithDevTools(applyMiddleware(ReduxThunk))
 );
 
+// get the packaged fonts
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -37,8 +41,10 @@ const fetchFonts = () => {
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
+  // fonts have to load before app can render
   if (!fontLoaded) {
     return (
+      //appLoading stalls loading until fonts load. MUST HAVE AN onError!!
       <AppLoading
         startAsync={fetchFonts}
         onFinish={() => {
@@ -50,7 +56,9 @@ export default function App() {
       />
     );
   }
+  // once fonts loaded:
   return (
+    //provider is redux wrapper for store. takes a store prop, which is instantiated store with all teh reduceers
     <Provider store={store}>
       <NavigationContainer />
     </Provider>
