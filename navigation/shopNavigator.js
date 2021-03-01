@@ -10,9 +10,10 @@ import CartScreen from '../screens/shop/CartScreen';
 import OrdersScreen from '../screens/shop/OrdersScreen';
 import UserProductsScreen from '../screens/user/UserProductsScreen';
 import EditProductScreen from '../screens/user/EditProductScreen';
+import AuthScreen from '../screens/user/AuthScreen';
 
 import Colors from '../constants/Colors';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 const defaultNavOptions = {
   headerStyle: {
@@ -113,4 +114,22 @@ const shopNavigator = createDrawerNavigator(
     },
   }
 );
-export default createAppContainer(shopNavigator);
+
+const authNavigator = createStackNavigator(
+  {
+    Auth: {
+      screen: AuthScreen,
+    },
+  },
+  { defaultNavigationOptions: defaultNavOptions }
+);
+
+const mainNavigator = createSwitchNavigator({
+  Auth: {
+    screen: authNavigator,
+  },
+  Shop: {
+    screen: shopNavigator,
+  },
+});
+export default createAppContainer(mainNavigator);

@@ -38,6 +38,14 @@ const UserProductsScreen = (props) => {
       },
     ]);
   };
+
+  if (userProducts.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>No products found. Please add your own products.</Text>
+      </View>
+    );
+  }
   return (
     <FlatList
       data={userProducts}
