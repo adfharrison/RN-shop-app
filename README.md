@@ -2,8 +2,6 @@
 
 ## Summary
 
-A WORK IN PROGRESS
-
 A dummy shopping app. Uses Firestore realtime DB, and firebase auth. Built using Expo CLI, it is android and iOS compatible.
 
 # Git
