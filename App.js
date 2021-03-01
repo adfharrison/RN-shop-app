@@ -5,6 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import ShopNavigator from './navigation/shopNavigator';
+import NavigationContainer from './navigation/NavigationContainer';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 
@@ -51,7 +52,7 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <ShopNavigator />
+      <NavigationContainer />
     </Provider>
   );
 }
