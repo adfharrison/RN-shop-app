@@ -1,4 +1,4 @@
-# A game app where your phone tries to guess a number
+# A Cross Platform Shopping App useing Firebase Auth and Firestore
 
 ## Summary
 
